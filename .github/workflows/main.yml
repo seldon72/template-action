@@ -1,0 +1,16 @@
+name: Test install on Ubuntu
+on: push
+jobs:
+  install:
+    name: Install Terraform
+    uses: ubuntu-latest
+    steps:
+    - name: Add Terraform gpg key
+      run: curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+    - name: Run apt
+      run: |
+        sudo apt-add-repository "deb [arch=$(dpkg --print-architecture)] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+        sudo apt update
+        sudo apt install -y terraform=0.14.5
+    - name: Terraform version
+      run: terraform -v 
