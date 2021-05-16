@@ -3,7 +3,7 @@ on: push
 jobs:
   install:
     name: Install Terraform
-    uses: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
     - name: Add Terraform gpg key
       run: curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
