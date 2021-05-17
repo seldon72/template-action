@@ -1,7 +1,5 @@
 name: 'Run Terraform'
 description: 'Validate and plan deploy'
-inputs:
-outputs:
 
 runs:
   using: "composite"
