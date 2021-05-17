@@ -5,12 +5,20 @@ jobs:
     name: Install Terraform
     runs-on: ubuntu-latest
     steps:
-    - name: Add Terraform gpg key
-      run: curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+    # - name: Add Terraform gpg key
+    #   run: curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+    # - name: Run apt
+    #   run: |
+    #     sudo apt-add-repository "deb [arch=$(dpkg --print-architecture)] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+    #     sudo apt update
+    #     sudo apt install -y terraform=0.14.6
+
     - name: Run apt
       run: |
-        sudo apt-add-repository "deb [arch=$(dpkg --print-architecture)] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
         sudo apt update
+        apt list terraform -a
+        sudo apt remove -y terraform
         sudo apt install -y terraform=0.14.6
+
     - name: Terraform version
       run: terraform version
