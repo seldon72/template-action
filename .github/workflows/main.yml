@@ -18,8 +18,10 @@ jobs:
         sudo apt-add-repository "deb [arch=$(dpkg --print-architecture)] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
         sudo apt-get update
         apt list terraform -a
+        which terraform
         sudo apt-get remove -y terraform
         sudo apt-get install -y terraform=0.14.6
+        which terraform
 
     - name: Terraform version
       run: terraform version
