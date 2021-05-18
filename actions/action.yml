@@ -4,20 +4,22 @@ description: 'Validate and plan deploy'
 runs:
   using: "composite"
   steps:
-    - run: curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+    - name: 'get PGP Key'
+      run: curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
       shell: bash
-    - run: |
+    - name: 'Install Terraform'
+      run: |
         sudo apt-add-repository "deb [arch=$(dpkg --print-architecture)] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
         sudo apt-get update
-        apt list terraform -a
-        which terraform
         sudo rm /usr/local/bin/terraform
         sudo apt-get install -y terraform=0.14.6
-        which terraform
       shell: bash
-    - run: terraform version
+    - name: 'Check Version'
+      run: terraform version
       shell: bash
-    - run: terraform init
+    - name: 'Terraform init'
+      run: terraform init
       shell: bash
-    - run: terraform plan -out workspace.plan
+    - name: 'Terraform plan'
+      run: terraform plan -out workspace.plan
       shell: bash
