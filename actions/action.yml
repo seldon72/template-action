@@ -9,6 +9,9 @@ runs:
       shell: bash
     - name: 'Install Terraform'
       run: |
+        echo "*******************************************"
+        echo "**  Installing Terrafrom                 **"
+        echo "*******************************************"
         sudo apt-add-repository "deb [arch=$(dpkg --print-architecture)] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
         sudo apt-get update
         sudo rm /usr/local/bin/terraform
@@ -18,8 +21,16 @@ runs:
       run: terraform version
       shell: bash
     - name: 'Terraform init'
-      run: terraform init
+      run: | 
+        echo "*******************************************"
+        echo "**  Terrafrom init                       **"
+        echo "*******************************************"
+        terraform init
       shell: bash
     - name: 'Terraform plan'
-      run: terraform plan -out workspace.plan
+      run: |
+        echo "*******************************************"
+        echo "**  Terrafrom plan                       **"
+        echo "*******************************************"
+        terraform plan -out workspace.plan
       shell: bash
